@@ -6,7 +6,7 @@ Tx Lens is an AI-powered system that converts raw blockchain transactions into *
 
 **Goal:** Build an interpretable, multi-chain transaction explainer that fetches, decodes, and summarizes blockchain activity using AI.
 
-**MVP Deliverable:**  
+**MVP Deliverable:**
 Given a transaction hash, Tx Lens returns:
 
 - A classification (swap, transfer, NFT mint, etc.)

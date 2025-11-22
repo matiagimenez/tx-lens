@@ -3,33 +3,40 @@ name = "tx-lens"
 version = "0.1.0"
 description = "Tx Lens is an AI system that converts raw blockchain transactions into clear, human-readable explanations"
 readme = "README.md"
-requires-python = "~=3.13.9, <3.14.0"
+requires-python = "~=3.13.9,<3.14.0"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
 dependencies = [
-    "fastapi[standard]>=0.121.3",
-    "loguru>=0.7.3",
-    "pydantic>=2.12.4",
-    "pydantic-settings>=2.12.0",
+  "fastapi[standard]>=0.121.3",
+  "loguru>=0.7.3",
+  "pydantic>=2.12.4",
+  "pydantic-settings>=2.12",
 ]
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.4.0",
-    "ipykernel>=7.1.0",
-    "poethepoet>=0.37.0",
+  "ipykernel>=7.1",
+  "poethepoet>=0.37",
+  "pre-commit>=4.4",
 ]
-
-[tool.poe.tasks]
-dev = "uvicorn t_lens.main:app --reload --host 0.0.0.0 --port 8000"
-format = "pre-commit run --all-files --verbose"
 
 [tool.ruff]
 line-length = 88
 
 [tool.pylint]
 disable = [
-    "missing-docstring",
-    "missing-module-docstring",
-    "missing-function-docstring",
-    "too-few-public-methods",
-    "astroid-error",
+  "missing-docstring",
+  "missing-module-docstring",
+  "missing-function-docstring",
+  "too-few-public-methods",
+  "astroid-error",
 ]
+
+[tool.poe.tasks]
+dev = "uvicorn tx_lens.main:main --reload --host 0.0.0.0 --port 8000"
+format = "pre-commit run --all-files --verbose"

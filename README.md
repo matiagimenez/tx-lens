@@ -8,7 +8,7 @@ Tx Lens is an AI system that converts raw blockchain transactions into **clear, 
 
 1. **User provides:**
 
-   - A wallet address  
+   - A wallet address
      **or**
    - A transaction hash
 
@@ -24,7 +24,7 @@ Tx Lens is an AI system that converts raw blockchain transactions into **clear, 
 
 **Example output:**
 
-> “You swapped **0.2 ETH for 350 USDC** on **Uniswap v3**.  
+> “You swapped **0.2 ETH for 350 USDC** on **Uniswap v3**.
 > Gas fees were **$14.25**.”
 
 ---

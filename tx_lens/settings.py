@@ -11,9 +11,8 @@ class ApplicationSettings(BaseSettings):
 
     HOST: str = "0.0.0.0"
     PORT: int = 8000
-    DEBUG: bool = True
 
     BASE_PATH: str = "/api/v1"
 
 
-Settings = ApplicationSettings()
+Settings = ApplicationSettings()  # pylint: disable=invalid-name
