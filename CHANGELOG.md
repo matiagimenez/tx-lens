@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.0.3 (2025-11-22)
+
+### Bug Fixes
+
+- **config**: Fix lint issues
+  ([`b864538`](https://github.com/matiagimenez/tx-lens/commit/b8645389f06ca9d9d851af4ef50354ca15f8ebf0))
+
+### Chores
+
+- **config**: Add semantic release configuration
+  ([`7878ff2`](https://github.com/matiagimenez/tx-lens/commit/7878ff2fef2ce5ef34d6337485c80e7b3c8c1fa3))
+
+
 ## v0.0.2 (2025-11-22)
 
 ### Bug Fixes
