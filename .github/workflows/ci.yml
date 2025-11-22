@@ -40,7 +40,7 @@ jobs:
 
       - name: Autoupdate pre-commit hooks
         run: |
-          pre-commit autoupdate
+          uv run pre-commit autoupdate
           differences=$(git diff | xargs)
 
           if [ -z "$differences" ]; then
