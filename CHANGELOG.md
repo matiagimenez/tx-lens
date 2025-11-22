@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.2 (2025-11-22)
+
+### Bug Fixes
+
+- **config**: Include version in FastAPI app and healthcheck response
+  ([`b4980fd`](https://github.com/matiagimenez/tx-lens/commit/b4980fdcb7735d7e29860708bb6de4c61145bbed))
+
+
 ## v0.0.1 (2025-11-22)
 
 ### Bug Fixes
