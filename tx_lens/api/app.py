@@ -2,10 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
+from tx_lens import __version__
 from tx_lens.api.v1.router import v1_router
 from tx_lens.settings import Settings
 
-app = FastAPI(title="Tx Lens")
+app = FastAPI(title="Tx Lens", version=__version__)
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,10 +19,10 @@ app.add_middleware(
 
 @app.get("/healthcheck")
 async def healthcheck():
-    return {"status": "OK"}
+    return {"status": "OK", "version": __version__}
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 async def redirect_to_docs():
     return RedirectResponse(url="/docs")
 

@@ -3,13 +3,16 @@ name = "tx-lens"
 version = "0.1.0"
 description = "Tx Lens is an AI system that converts raw blockchain transactions into clear, human-readable explanations"
 readme = "README.md"
-requires-python = "~=3.13.9,<3.14.0"
+authors = [
+  { name = "Matias Gimenez" },
+]
+
+requires-python = ">=3.13"
+
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
   "fastapi[standard]>=0.121.3",
@@ -38,5 +41,5 @@ disable = [
 ]
 
 [tool.poe.tasks]
-dev = "uvicorn tx_lens.main:main --reload --host 0.0.0.0 --port 8000"
+dev = "uvicorn tx_lens.api.app:app --reload --host 0.0.0.0 --port 8000"
 format = "pre-commit run --all-files --verbose"
