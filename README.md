@@ -1,89 +1,89 @@
-# 🪙 Explain My Crypto Transactions — AI Assistant
+# 🪙 Tx Lens — AI-Powered Crypto Transaction Explainer
 
-An AI system that converts raw blockchain transactions into clear, human-readable explanations.
-
----
+Tx Lens is an AI system that converts raw blockchain transactions into **clear, human-readable explanations**.
 
 ## 🚀 MVP Features
 
 ### 🧱 Core Flow
-1. **User inputs:**
-   - Wallet address  
-   - **or** raw transaction hash  
 
-2. **System fetches on-chain data** using provider APIs:
-   - Etherscan  
-   - Blockscout  
-   - Solana RPC  
-   - (Extensible to more chains)
+1. **User provides:**
+
+   - A wallet address  
+     **or**
+   - A transaction hash
+
+2. **Tx Lens fetches on-chain data** using provider APIs:
+
+   - Etherscan / Blockscout
+   - Solana RPC
+   - (Easily extensible to additional chains)
 
 3. **Explanation Agent**
-   - Interprets on-chain activity  
-   - Produces simplified explanations  
+   - Interprets the transaction
+   - Produces a simplified, natural-language explanation
 
-**Example output**
-> “You swapped **0.2 ETH → 350 USDC** on **Uniswap v3**.  
+**Example output:**
+
+> “You swapped **0.2 ETH for 350 USDC** on **Uniswap v3**.  
 > Gas fees were **$14.25**.”
-
----
-
-## 🔍 Optional MVP+ Agents
-
-### **Risk Analysis Agent**
-Flags:
-- Suspicious addresses  
-- Scam-like behavior  
-- High-risk contract interactions  
-
-### **Fee Breakdown Agent**
-Outputs:
-- Base fee  
-- Priority fee  
-- Gas used  
-- Estimated USD total cost  
-
-### **Contract Interaction Agent**
-- ABI-aware method decoding  
-- Explains contract purpose  
-- Summarizes what the smart contract did  
 
 ---
 
 ## 📈 Scalable Multi-Agent Architecture
 
-### 1. **Chain Router Agent**
-- Detects which chain the transaction belongs to  
-- Routes to the correct RPC/API client  
-- Normalizes data structures  
+### **1. Chain Router Agent**
 
-### 2. **Transaction Fetcher Agent**
-- Grabs:
-  - Raw transaction  
-  - Receipt  
-  - Logs  
-- Produces a unified internal format  
+- Detects the chain from the input
+- Routes to the correct RPC/API provider
+- Normalizes chain-specific responses
 
-### 3. **Transaction Decoder Agent**
-Decodes:
-- ABI method calls  
-- Token transfers  
-- Swaps  
-- DEX interactions  
-- LP deposits/withdrawals  
-- NFT transfers  
+### **2. Transaction Fetcher Agent**
 
-Optionally:
-- Run VM-level simulations (Tenderly, anvil, local EVM) for advanced decoding  
+Retrieves:
 
-### 4. **Explanation Agent**
-- Converts decoded blockchain events into natural language  
-- Uses templates depending on event type (swap, transfer, NFT sale, etc.)  
+- Raw transaction
+- Transaction receipt
+- Event logs
 
-### 5. **Formatter Agent**
-Outputs in:
-- Markdown  
-- JSON  
-- Rich, structured messages for UI rendering  
+Outputs a **unified internal transaction format**.
+
+### **3. Transaction Decoder Agent**
+
+- Interprets function signatures
+- Decodes logs and events
+- Classifies transaction type (swap, transfer, NFT mint, etc.)
+
+### **4. Explanation Agent**
+
+- Summarizes what happened
+- Adds context: DEX, token symbols, USD values, protocol names
+
+### **5. Formatter Agent**
+
+Produces structured outputs:
+
+- Markdown
+- JSON
+- Rich messages for UI components
+
+---
+
+## 🔍 Optional Additional Agents (MVP+)
+
+### **6. Fee Breakdown Agent**
+
+Provides a detailed view:
+
+- Base fee
+- Priority fee
+- Gas used
+- Estimated USD cost
+
+### **7. Contract Interaction Agent**
+
+- Decodes ABI methods
+- Explains the contract’s purpose
+- Summarizes all contract-level actions
 
 ---
 
@@ -97,3 +97,4 @@ B --> C[Transaction Fetcher Agent]
 C --> D[Transaction Decoder Agent]
 D --> E[Explanation Agent]
 E --> F[Formatter Agent]
+```
