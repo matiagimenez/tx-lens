@@ -34,9 +34,9 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          token: ${{ env.GITHUB_TOKEN }}
+          token: ${{ env.GH_TOKEN }}
           branch: chore/pre-commit-autoupdate
           title: Update pre-commit hooks
           commit-message: 'chore(config): update pre-commit hooks'

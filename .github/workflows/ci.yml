@@ -18,9 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          token: ${{ env.GITHUB_TOKEN }}
+          token: ${{ env.GH_TOKEN }}
           fetch-depth: 0
 
       - name: Set up Python 3.13
