@@ -53,11 +53,8 @@ preview = true
 fix = true
 format.indent-style = "space"
 format.quote-style = "double"
-######################
-# mypy configuration #
-######################
-format.skip-magic-trailing-comma = false
 format.line-ending = "auto"
+format.skip-magic-trailing-comma = false
 
 [tool.pylint]
 disable = [

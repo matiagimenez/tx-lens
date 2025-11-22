@@ -3,7 +3,7 @@ import uvicorn
 from tx_lens.settings import Settings
 
 
-def main():
+def main() -> None:
     uvicorn.run(
         "tx_lens.api.app:app",
         host=Settings.HOST,

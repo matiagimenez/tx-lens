@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -18,12 +20,12 @@ app.add_middleware(
 
 
 @app.get("/healthcheck")
-async def healthcheck():
+async def healthcheck() -> dict[str, Any]:
     return {"status": "OK", "version": __version__}
 
 
 @app.get("/", include_in_schema=False)
-async def redirect_to_docs():
+async def redirect_to_docs() -> RedirectResponse:
     return RedirectResponse(url="/docs")
 
 

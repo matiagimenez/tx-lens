@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.post("/explain")
-async def explain_transaction(request: TransactionRequest):
+async def explain_transaction(request: TransactionRequest) -> TransactionResponse:
     """
     Convert a raw blockchain transaction into a human-readable explanation.
     """
