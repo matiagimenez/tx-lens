@@ -38,27 +38,27 @@ jobs:
         run: |
           uv sync --all-groups --frozen
 
-      - name: Autoupdate pre-commit hooks
-        run: |
-          uv run pre-commit autoupdate
-          differences=$(git diff | xargs)
+      # - name: Autoupdate pre-commit hooks
+      #   run: |
+      #     uv run pre-commit autoupdate
+      #     differences=$(git diff | xargs)
 
-          if [ -z "$differences" ]; then
-            echo "No changes needed"
-            exit 0
-          fi
+      #     if [ -z "$differences" ]; then
+      #       echo "No changes needed"
+      #       exit 0
+      #     fi
 
-          echo "::error::The pre-commit hooks are outdated"
-          echo "$differences"
+      #     echo "::error::The pre-commit hooks are outdated"
+      #     echo "$differences"
 
-          git switch "${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
-          git config --global user.email "$(git log -1 --pretty=format:'%ae' | xargs)"
-          git config --global user.name "${{ github.actor }}"
-          git add .pre-commit-config.yaml
-          git commit -m "chore(config): update pre-commit hooks"
-          git push
+      #     git switch "${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
+      #     git config --global user.email "$(git log -1 --pretty=format:'%ae' | xargs)"
+      #     git config --global user.name "${{ github.actor }}"
+      #     git add .pre-commit-config.yaml
+      #     git commit -m "chore(config): update pre-commit hooks"
+      #     git push
 
-          sleep 15
+      #     sleep 15
 
       - name: Run lint and format checks
         id: format
