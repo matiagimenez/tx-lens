@@ -8,7 +8,7 @@ from tx_lens import __version__
 from tx_lens.api.v1.router import v1_router
 from tx_lens.settings import Settings
 
-app = FastAPI(title="Tx Lens", version=__version__)
+app = FastAPI(title="Transactions Lens", version=__version__)
 
 app.add_middleware(
     CORSMiddleware,

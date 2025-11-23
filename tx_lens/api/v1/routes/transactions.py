@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from loguru import logger
 
-from tx_lens.schemas.transaction import TransactionRequest, TransactionResponse
+from .schemas import TransactionRequest, TransactionResponse
 
 router = APIRouter()
 

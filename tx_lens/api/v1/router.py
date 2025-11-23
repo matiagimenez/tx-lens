@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from tx_lens.api.v1.endpoints import transactions
+from .routes import transactions
 
 v1_router = APIRouter(prefix="/v1")
 
