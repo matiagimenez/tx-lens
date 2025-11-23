@@ -1,21 +1,16 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class TransactionRequest(BaseModel):
-    transaction_hash: str = Field(..., description="The transaction hash to explain")
-    blockchain: str = Field(default="ethereum", description="The blockchain network")
+    model_config = ConfigDict(populate_by_name=True)
+
+    hash_: str = Field(alias="hash", description="The transaction hash to explain")
+    blockchain: str = Field(description="The blockchain network")
 
 
 class TransactionResponse(BaseModel):
-    transaction_hash: str
-    explanation: str
-    blockchain: str
+    model_config = ConfigDict(populate_by_name=True)
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "transaction_hash": "0x1234567890abcdef",
-                "explanation": "This transaction transferred 1.5 ETH from Alice to Bob",
-                "blockchain": "ethereum",
-            }
-        }
+    hash_: str = Field(alias="hash")
+    blockchain: str
+    explanation: str

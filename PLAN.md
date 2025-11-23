@@ -6,182 +6,114 @@ Tx Lens is an AI-powered system that converts raw blockchain transactions into *
 
 **Goal:** Build an interpretable, multi-chain transaction explainer that fetches, decodes, and summarizes blockchain activity using AI.
 
+**Strategy:**
+The project will be implemented in two distinct stages to maximize learning and extensibility:
+1.  **Stage 1: LangChain MVP** — A direct implementation using standard LangChain primitives (Chains, Runnables) to establish core functionality.
+2.  **Stage 2: LangGraph Migration** — Refactoring the system into a graph-based architecture using LangGraph to handle complex state and cyclic flows.
+
 **MVP Deliverable:**
 Given a transaction hash, Tx Lens returns:
-
 - A classification (swap, transfer, NFT mint, etc.)
 - A simple human-readable explanation
 - Fees and USD cost
 - Structured JSON output
 
+---
+
+# 🏁 Stage 1: LangChain MVP
+
+Focus on getting the core logic working using simple chains and tools.
+
 ## ✅ Phase 1 — Foundations
 
 ### 1. Project Setup
-
 - Setup Python project (FastAPI recommended)
 - Add environment handling (Pydantic Settings)
 - Configure RPC/API providers:
-- Alchemy/Infura (EVM)
-- Blockscout
-- Optional: Solana RPC
+    - Alchemy/Infura (EVM)
+    - Blockscout
+    - Optional: Solana RPC
 
----
+## ✅ Phase 2 — Core Querying Pipeline (LangChain)
 
-## ✅ Phase 2 — Core Querying Pipeline
+### 2. Chain Router Chain
+- Input: `tx_hash`
+- Logic: Detects chain from hash format or user input
+- Output: `chain_id` / `provider_url`
 
-### 2. Chain Router Agent
+### 3. Transaction Fetcher Tool
+- Input: `tx_hash`, `chain_id`
+- Logic: Fetches raw tx, receipt, and logs
+- Output: **Unified Internal Transaction Format**
 
-- Detects chain from tx hash or user input
-- Routes to correct provider
-- Normalizes chain-specific response shape
+## ✅ Phase 3 — Decoding Layer (LangChain)
 
-### 3. Transaction Fetcher Agent
+### 4. Decoder Tools
+- **Function Decoder**: Decodes 4-byte selectors
+- **Log Decoder**: Decodes event signatures
+- **ABI Matcher**: Matches against known protocols (Uniswap, ERC20, etc.)
 
-Fetches:
+### 5. Metadata Resolver Tool
+- Fetches token symbols, decimals, names
+- Normalizes amounts
 
-- Raw transaction
-- Transaction receipt
-- Logs/events
+## ✅ Phase 4 — AI Explanation Engine (LangChain)
 
-Outputs a **unified internal transaction format**.
-
----
-
-## ✅ Phase 3 — Decoding Layer
-
-### 4. Transaction Decoder Agent
-
-Responsibilities:
-
-- Decode function selectors (4-byte)
-- Decode logs (event signatures)
-- Match common protocol ABIs (Uniswap, ERC20, ERC721)
-- Classify transaction type:
-- Transfer
-- Swap
-- Approval
-- Liquidity actions
-- NFT mint/transfer
-
-### 5. Token Metadata Resolver
-
-- Resolve token symbol, decimals, name
-- Cache metadata locally
-- Normalize token amounts
-
----
-
-## ✅ Phase 4 — AI Explanation Engine
-
-### 6. Explanation Agent
-
-Inputs:
-
-- Decoded transaction
-- Token information
-- USD conversions (optional)
-
-Outputs:
-
-- Short explanation
-- Optional: detailed breakdown
-
-### 7. Formatter Agent
-
-Formats output into:
-
-- Markdown
-- JSON
-- UI-ready "blocks"
-
----
+### 6. Explanation Chain
+- **Prompt Template**: Injects decoded tx data + metadata
+- **LLM**: Generates human-readable summary
+- **Output Parser**: Structured JSON (summary, details, fees)
 
 ## ✅ Phase 5 — API Layer
 
-### 8. FastAPI Endpoints
-
-**POST /tx**
-
-```json
-{
-	"tx_hash": "...",
-	"chain": "eth"
-}
-```
-
-Response:
-
-```json
-{
-  "summary": "...",
-  "details": { ... },
-  "fees": { ... }
-}
-```
-
-## 🚀 Phase 6 — Optional MVP+ Agents
-
-### 9. Fee Breakdown Agent
-
-- Extract base fee, priority fee, gas used
-- Compute total gas cost in ETH
-- Convert to USD using price API
-- Output structured fee breakdown:
-  - base_fee
-  - priority_fee
-  - gas_used
-  - gas_cost_eth
-  - gas_cost_usd
-
-### 10. Contract Interaction Agent
-
-- Decode ABI methods using:
-  - Known protocol ABIs (Uniswap, ERC20, ERC721, etc.)
-  - 4byte directory API (optional)
-- Detect contract type:
-  - Token
-  - Router/DEX
-  - NFT contract
-  - Proxy contract
-- Summarize smart-contract actions:
-  - approval
-  - mint
-  - swap
-  - transfer
-  - liquidity add/remove
+### 7. FastAPI Endpoints
+- **POST /tx**
+    - Triggers the LangChain pipeline
+    - Returns structured response
 
 ---
 
-## 🧪 Phase 7 — Testing
+# 🔄 Stage 2: LangGraph Migration
 
-### 11. Testing Strategy
+Refactor the linear chains into a stateful graph architecture.
 
-#### Unit Tests
+## ✅ Phase 6 — Graph Architecture Design
 
-- Transaction Fetcher (mock RPC responses)
-- Chain Router logic
-- Decoder (function signatures + event logs)
-- Token Metadata Resolver
-- Fee Breakdown Agent
-- Explanation Agent (prompt testing)
+### 8. State Definition
+- Define `AgentState` (TypedDict) to hold:
+    - `tx_hash`
+    - `raw_tx_data`
+    - `decoded_data`
+    - `explanation`
+    - `errors`
 
-#### Tools
+### 9. Node Implementation
+- Convert "Chains" and "Tools" from Stage 1 into Graph Nodes:
+    - `RouterNode`
+    - `FetcherNode`
+    - `DecoderNode`
+    - `ExplainerNode`
 
-- pytest
-- pytest-asyncio
-- responses or httpx-mock for API mocks
+## ✅ Phase 7 — Graph Orchestration
 
-#### Test Cases
+### 10. Edge Definition
+- Define conditional edges:
+    - If `fetch_error` -> `ErrorNode`
+    - If `unknown_abi` -> `GenericExplainerNode`
+    - If `success` -> `FormatterNode`
 
-- ETH transfer
-- ERC20 transfer
-- Uniswap swap
-- NFT mint
-- Failed transaction
-- Contract interaction with unknown ABI
+### 11. Compilation & Testing
+- Compile the graph (`workflow.compile()`)
+- Visualize graph with LangSmith
+- Verify parity with Stage 1 outputs
 
 ---
 
-## 📦 Phase 8 — Containerization
+# 🚀 Phase 8 — Optional MVP+ Features
 
-- Create `Dockerfile` for FastAPI service
+### 12. Fee Breakdown
+- Extract base/priority fees
+- Calculate USD costs
+
+### 13. Advanced Contract Interaction
+- Deep decoding for complex protocols (Aggregators, Bridges)
