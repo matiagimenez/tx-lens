@@ -15,8 +15,9 @@ class TransactionReceipt(BaseModel):
     contract_address: str | None = Field(default=None)
     cumulative_gas_used: int
     effective_gas_price: int
+    status: int
 
-    @classmethod
+    # pylint: disable=no-self-use, no-self-argument
     @field_validator(
         "block_hash",
         "transaction_hash",

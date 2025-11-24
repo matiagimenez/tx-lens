@@ -17,7 +17,7 @@ class Transaction(BaseModel):
     index: int = Field(alias="transactionIndex")
     value: int
 
-    @classmethod
+    # pylint: disable=no-self-use, no-self-argument
     @field_validator("block_hash", "hash_", mode="before")
     def hexbytes_to_str(cls, value: str | bytes) -> str:
         if isinstance(value, str):
