@@ -30,9 +30,9 @@ Focus on getting the core logic working using simple chains and tools.
 - Setup Python project (FastAPI recommended)
 - Add environment handling (Pydantic Settings)
 - Configure RPC/API providers:
-    - Alchemy/Infura (EVM)
+    - Infura (EVM)
     - Blockscout
-    - Optional: Solana RPC
+
 
 ## ✅ Phase 2 — Core Querying Pipeline (LangChain)
 

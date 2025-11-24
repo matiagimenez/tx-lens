@@ -14,5 +14,7 @@ class ApplicationSettings(BaseSettings):
 
     BASE_PATH: str = "/api/v1"
 
+    INFURA_API_KEY: str = ""
+
 
 Settings = ApplicationSettings()  # pylint: disable=invalid-name

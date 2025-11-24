@@ -15,8 +15,6 @@ Tx Lens is an AI system that converts raw blockchain transactions into **clear, 
 2. **Tx Lens fetches on-chain data** using provider APIs:
 
    - Etherscan / Blockscout
-   - Solana RPC
-   - (Easily extensible to additional chains)
 
 3. **Explanation Agent**
    - Interprets the transaction

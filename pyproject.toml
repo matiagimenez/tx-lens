@@ -15,9 +15,11 @@ classifiers = [
 ]
 dependencies = [
   "fastapi[standard]>=0.121.3",
+  "inject>=5.3",
   "loguru>=0.7.3",
   "pydantic>=2.12.4",
   "pydantic-settings>=2.12",
+  "web3>=7.14",
 ]
 
 urls.repository = "https://github.com/matiagimenez/tx-lens"
