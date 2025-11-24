@@ -3,7 +3,6 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from loguru import logger
 
-from tx_lens.domain import Transaction
 from tx_lens.services import TransactionService
 
 from .schemas import TransactionRequest, TransactionResponse
@@ -23,12 +22,11 @@ async def explain_transaction(
     """
     Convert a raw blockchain transaction into a human-readable explanation.
     """
-    logger.info(f"Processing transaction: {request.hash_}")
+    logger.info(f"Processing transaction: {request.transaction_hash}")
 
-    tx = service.explain(Transaction(hash=request.hash_))
+    tx = service.explain(request.transaction_hash)
 
     return TransactionResponse(
-        hash=tx.hash_,
+        transaction_hash=tx.hash_,
         explanation="Transaction explanation will be implemented here",
-        blockchain=request.blockchain,
     )

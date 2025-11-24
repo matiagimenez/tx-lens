@@ -1,3 +1,4 @@
-from .transaction import Transaction
+from .interfaces import NetworkClient
+from .models import Transaction, TransactionReceipt
 
-__all__ = ["Transaction"]
+__all__ = ["Transaction", "NetworkClient", "TransactionReceipt"]
