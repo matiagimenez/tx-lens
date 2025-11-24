@@ -32,7 +32,7 @@ Focus on getting the core logic working using simple chains and tools.
 - Configure RPC/API providers:
     - Alchemy/Infura (EVM)
     - Blockscout
-    - Optional: Solana RPC
+
 
 ## ✅ Phase 2 — Core Querying Pipeline (LangChain)
 
