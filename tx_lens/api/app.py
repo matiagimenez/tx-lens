@@ -1,14 +1,23 @@
-from typing import Any
+from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from tx_lens import __version__
-from tx_lens.api.v1.router import v1_router
+from tx_lens.api.v1 import register_v1_exception_handlers, v1_router
+from tx_lens.injections import configure_injections
 from tx_lens.settings import Settings
 
-app = FastAPI(title="Transactions Lens", version=__version__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:  # pylint: disable=redefined-outer-name,unused-argument
+    configure_injections()
+    yield
+
+
+app = FastAPI(title="Transactions Lens", version=__version__, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,6 +26,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+register_v1_exception_handlers(app)
 
 
 @app.get("/healthcheck")

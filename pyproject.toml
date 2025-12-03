@@ -15,9 +15,11 @@ classifiers = [
 ]
 dependencies = [
   "fastapi[standard]>=0.121.3",
+  "inject>=5.3",
   "loguru>=0.7.3",
   "pydantic>=2.12.4",
   "pydantic-settings>=2.12",
+  "web3>=7.14",
 ]
 
 urls.repository = "https://github.com/matiagimenez/tx-lens"
@@ -27,6 +29,9 @@ dev = [
   "ipykernel>=7.1",
   "poethepoet>=0.37",
   "pre-commit>=4.4",
+  "pytest>=9",
+  "pytest-cov>=4.1",
+  "pytest-recording>=0.13",
 ]
 
 [tool.ruff]
@@ -80,10 +85,6 @@ load-plugins = [
   "pylint.extensions.set_membership",
 ]
 
-##################################
-# semantic release configuration #
-##################################
-
 [tool.mypy]
 python_version = "3.13"
 disallow_untyped_defs = true
@@ -93,17 +94,10 @@ warn_return_any = true
 warn_unused_ignores = true
 disable_error_code = [ "var-annotated" ]
 
-##################################
-# pylint configuration           #
-##################################
-
 [tool.poe.tasks]
 dev = "uvicorn tx_lens.api.app:app --reload --host 0.0.0.0 --port 8000"
 format = "pre-commit run --all-files --verbose"
-
-##################################
-# ruff configuration             #
-##################################
+test = "pytest --cov=tx_lens --cov-report=term-missing"
 
 [tool.semantic_release]
 branch = "main"

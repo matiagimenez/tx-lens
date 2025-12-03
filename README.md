@@ -15,8 +15,6 @@ Tx Lens is an AI system that converts raw blockchain transactions into **clear, 
 2. **Tx Lens fetches on-chain data** using provider APIs:
 
    - Etherscan / Blockscout
-   - Solana RPC
-   - (Easily extensible to additional chains)
 
 3. **Explanation Agent**
    - Interprets the transaction
@@ -82,19 +80,18 @@ Provides a detailed view:
 ### **7. Contract Interaction Agent**
 
 - Decodes ABI methods
-- Explains the contract’s purpose
+- Explains the contract's purpose
 - Summarizes all contract-level actions
 
 ---
 
-## 🧱 Architecture Diagram (Mermaid)
+## 🔌 MCP Server Integration
 
-```mermaid
-flowchart TD
+Tx Lens exposes its transaction analysis tools through a **Model Context Protocol (MCP) server**, enabling AI assistants to directly query and explain blockchain transactions.
 
-A[User Input: Wallet or Tx Hash] --> B[Chain Router Agent]
-B --> C[Transaction Fetcher Agent]
-C --> D[Transaction Decoder Agent]
-D --> E[Explanation Agent]
-E --> F[Formatter Agent]
-```
+### Available MCP Tools:
+
+- `fetch_transaction` - Retrieve raw transaction data from the blockchain
+- `explain_transaction` - Generate human-readable transaction explanations
+
+This allows AI assistants to seamlessly integrate blockchain data into their workflows and provide real-time transaction insights.

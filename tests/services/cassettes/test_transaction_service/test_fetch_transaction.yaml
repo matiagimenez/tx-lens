@@ -1,0 +1,92 @@
+interactions:
+- request:
+    body: '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id":
+      0}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '73'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - web3.py/7.14.0/web3.providers.rpc.rpc.HTTPProvider
+    method: POST
+    uri: https://mainnet.infura.io/v3/[REDACTED]
+  response:
+    body:
+      string: '{"jsonrpc":"2.0","id":0,"result":"Geth/v1.16.7-stable-b9f3a3d9/linux-arm64/go1.24.9"}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '86'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Dec 2025 23:40:00 GMT
+      Vary:
+      - Accept-Encoding
+      - Origin
+      X-Send-To-Many:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"jsonrpc": "2.0", "method": "eth_getTransactionByHash", "params": ["0x206d9ed0458f07377c05045b1c9d3e4cdb03c03141f4070f5f88dd512d74dda0"],
+      "id": 1}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '147'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - web3.py/7.14.0/web3.providers.rpc.rpc.HTTPProvider
+    method: POST
+    uri: https://mainnet.infura.io/v3/[REDACTED]
+  response:
+    body:
+      string: '{"jsonrpc":"2.0","id":1,"result":{"blockHash":"0x16ffcc486c8a26edec5eed647404c38e748e4d31932ba4855f05bbd7fe5e4ba2","blockNumber":"0x16c3858","from":"0x0113a6b755fbad36b4249fd63002e2035e401143","gas":"0x5208","gasPrice":"0x2c4f9238","maxFeePerGas":"0x77359400","maxPriorityFeePerGas":"0xf4240","hash":"0x206d9ed0458f07377c05045b1c9d3e4cdb03c03141f4070f5f88dd512d74dda0","input":"0x","nonce":"0x57b9c","to":"0x8cbad60b6894b46c1f2f062c8ef3711c514b5563","transactionIndex":"0x76","value":"0x1db8228d02a0","type":"0x2","accessList":[],"chainId":"0x1","v":"0x1","r":"0xd7df28b25cbbc74774d4bb94090fd77fbef9996ffe924802b63d31c0c6f6e250","s":"0x7cf684e288be5d605ac151233af352b6330f82a8b968800ffe00146d72c0c698","yParity":"0x1"}}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '720'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Dec 2025 23:40:01 GMT
+      Request-Id:
+      - f3c71914-5522-43aa-9c18-aeb71ef8071d
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Via:
+      - JSON-RPC/2.0 mainnet-geth-pruned-state-blb.ethereum-network-1-prod-us-east-1.eks.infura.org
+      X-Send-To-Many:
+      - '0'
+      X-Trace-Id:
+      - 89b7e6ada76bfae0354bc2ba5d012fc1
+    status:
+      code: 200
+      message: OK
+version: 1
