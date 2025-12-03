@@ -17,7 +17,7 @@ def handle_unexisting_transaction_exception(
 def register_transactions_exception_handler(app: FastAPI) -> None:
     app.add_exception_handler(
         UnexistingTransaction,
-        handle_unexisting_transaction_exception,
+        handle_unexisting_transaction_exception,  # type: ignore[arg-type]
     )
 
 

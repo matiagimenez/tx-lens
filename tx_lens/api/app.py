@@ -1,20 +1,19 @@
 from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator
 
-import inject
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from tx_lens import __version__
 from tx_lens.api.v1 import register_v1_exception_handlers, v1_router
-from tx_lens.injections.dependencies import configure_injection
+from tx_lens.injections import configure_injections
 from tx_lens.settings import Settings
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:  # pylint: disable=redefined-outer-name,unused-argument
-    inject.configure(configure_injection)
+    configure_injections()
     yield
 
 
