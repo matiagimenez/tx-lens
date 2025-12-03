@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from tx_lens import __version__
-from tx_lens.api.v1.router import v1_router
+from tx_lens.api.v1 import register_v1_exception_handlers, v1_router
 from tx_lens.injections.dependencies import configure_injection
 from tx_lens.settings import Settings
 
@@ -27,6 +27,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+register_v1_exception_handlers(app)
 
 
 @app.get("/healthcheck")

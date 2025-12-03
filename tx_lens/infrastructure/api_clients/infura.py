@@ -1,6 +1,12 @@
 from web3 import Web3
+from web3.exceptions import TransactionNotFound
 
-from tx_lens.domain import NetworkClient, Transaction, TransactionReceipt
+from tx_lens.domain import (
+    NetworkClient,
+    Transaction,
+    TransactionReceipt,
+    UnexistingTransaction,
+)
 from tx_lens.settings import Settings
 from tx_lens.utils import logger
 
@@ -24,8 +30,12 @@ class InfuraClient(NetworkClient):
         return client
 
     def get_transaction(self, tx_hash: str) -> Transaction:
-        transaction = self.client.eth.get_transaction(tx_hash)
-        return Transaction.model_validate(transaction)
+        try:
+            transaction = self.client.eth.get_transaction(tx_hash)
+            return Transaction.model_validate(transaction)
+        except TransactionNotFound as exception:
+            logger.error(f"Error getting transaction: {exception}")
+            raise UnexistingTransaction(tx_hash) from exception
 
     def get_transaction_receipt(self, tx_hash: str) -> TransactionReceipt:
         transaction_receipt = self.client.eth.get_transaction_receipt(tx_hash)

@@ -24,9 +24,9 @@ async def explain_transaction(
     """
     logger.info(f"Processing transaction: {request.transaction_hash}")
 
-    tx = service.explain(request.transaction_hash)
+    tx_explanation = service.explain(request.transaction_hash)
 
     return TransactionResponse(
-        transaction_hash=tx.hash_,
-        explanation="Transaction explanation will be implemented here",
+        transaction_hash=request.transaction_hash,
+        explanation=tx_explanation.model_dump(by_alias=True),
     )
